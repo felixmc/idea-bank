@@ -1,0 +1,27 @@
+{
+  "name": "react-todo",
+  "version": "1.0.0",
+  "description": "react learning experiment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felixmc/React-Alt-Todo.git"
+  },
+  "author": "Felix Milea-Ciobanu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/felixmc/React-Alt-Todo/issues"
+  },
+  "homepage": "https://github.com/felixmc/React-Alt-Todo#readme",
+  "dependencies": {
+    "alt": "^0.17.6",
+    "debug": "^2.2.0",
+    "express": "^4.13.3",
+    "immutable": "^3.7.5",
+    "react": "^0.14.0",
+    "socket.io": "^1.3.7"
+  }
+}
