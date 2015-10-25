@@ -10,7 +10,7 @@ let debug = require('debug')('todo:component:task').bind(null, '');
 
 let Task = React.createClass({
 
-  _onClick() {
+  _onDoubleClick() {
     debug('clicked', this.props);
     TodoActions.toggleTask(this.props.id);
   },
@@ -24,7 +24,7 @@ let Task = React.createClass({
     });
 
     return (
-      <li onClick={this._onClick} className={classes}>{this.props.label}</li>
+      <li onDoubleClick={this._onDoubleClick} className={classes}>{this.props.label}</li>
     );
   }
 

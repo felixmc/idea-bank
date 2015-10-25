@@ -4,6 +4,7 @@ import React from 'react';
 import TodoStore from '../TodoStore';
 
 import Task from './Task.jsx';
+import NewTask from './NewTask.jsx';
 
 import Immutable from 'immutable';
 
@@ -41,15 +42,26 @@ class TodoApp extends React.Component {
 
   render() {
     let { data } = this.state;
-    debug('rendering with state', data.toJS());
+    debug('rendering with state', data.toJS(), data.get('tasks').toArray());
+
+    // let tasks = data.get('tasks').toArray();
+
+    // debug('tasks', tasks);
+
+    // tasks.forEach(function(task) {
+    //   debug('task', task);
+      // debug('task:', task.toJS());
+      // return(<Task {...task} key={task.id} />);
+    // });
 
     return (
       <div>
         <h2>React Todos</h2>
+        <NewTask tasks={data.get('tasks')} />
         <ul className="task-list">
           {data.get('tasks').toList().map(function(task) {
             debug('entry:', task);
-            return(<Task {...task} key={task.id}></Task>);
+            return(<Task {...task} key={task.id} />);
           })}
         </ul>
       </div>

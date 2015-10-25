@@ -4,11 +4,11 @@ let debug = require('debug')('todo:actions').bind(null, '');
 
 class TodoActions {
 
-  // createTask(task) {
-  //   debug('dispatching createTask', task);
-  //   this.dispatch(task);
-  // }
-  //
+  createTask(task) {
+    debug('dispatching createTask', task);
+    this.dispatch(task);
+  }
+  
   // createCategory(category) {
   //   debug('dispatching createCategory', category);
   //   this.dispatch(category);

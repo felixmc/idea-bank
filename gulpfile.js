@@ -40,6 +40,10 @@ gulp.task('build-js', function() {
 gulp.task('build-style', function() {
 	gulp.src(SRC + '**/*.scss')
 		.pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+		.pipe(sass({
+      style: 'expanded',
+      sourceComments: 'normal'
+    }))
 		.pipe(autopfx())
 		.pipe(gulp.dest(DIST));
 });

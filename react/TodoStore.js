@@ -28,26 +28,25 @@ class TodoStore {
     });
 
     this.bindListeners({
-      // createTask:     TodoActions.createTask,
+      createTask:     TodoActions.createTask,
       // createCategory: TodoActions.createCategory,
       toggleTask:     TodoActions.toggleTask
     });
   }
 
-  // createTask(task) {
-  //   debug('create task');
-  //   let newState = this.state
-  //     .updateIn('tasks', tasks => tasks.set(task.id, Immutable.fromJS(task)))
-  //     .updateIn('categories',
-  //       categories => categories.updateIn(
-  //         task.category, category => category.updateIn(
-  //           'tasks', tasks => tasks.push( task.id )
-  //         )
-  //       )
-  //     );
-  //   this.setState( newState );
-  // }
-  //
+  createTask(task) {
+    task.id = (Math.floor(Math.random() * (1000)) + 20).toString();
+    task.isComplete = false;
+
+    debug('create task', task);
+
+    this.setState(function(state) {
+      let newState = state.update('tasks', tasks => tasks.set(task.id, task));
+      debug('create task new state', newState.toJS());
+      return newState;
+    });
+  }
+
   // createCategory(category) {
   //   debug('create category');
   //   let immCat = Immutable.fromJS(category).set('tasks', Immutable.List());
@@ -56,10 +55,11 @@ class TodoStore {
   // }
 
   toggleTask(taskId) {
-    this.setState(function(old) {
-      debug('toggling', taskId, old);
+    this.setState(function(state) {
+      debug('toggling', taskId, state, state.toJS());
 
-      let newState = old.updateIn(['tasks', taskId + ''], task => {
+      let newState = state.updateIn(['tasks', taskId], task => {
+        debug('toggle task', task);
         if (task) {
           task.isComplete = !task.isComplete;
         }
