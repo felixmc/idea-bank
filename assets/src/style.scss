@@ -1,0 +1,52 @@
+$dark: #2C3E50;
+$light: #ECF0F1;
+$contrast: #E74C3C;
+$primary: #3498DB;
+$secondary: #2980B9;
+
+$font: Helvetica, sans-serif;
+
+
+body {
+  background: $dark;
+  font-size: 16px;
+  font-family: $font;
+  color: $light;
+}
+
+#app {
+  width: 400px;
+  margin: 20px auto 0;
+
+  h2 {
+    text-align: center;
+  }
+
+  .task-list {
+    padding: 0;
+  }
+
+  .task {
+    list-style-type: none;
+    background: $contrast;
+    margin-bottom: 10px;
+    font-family: monospace;
+    font-size: .9em;
+    padding: 7px 10px;
+
+    &:before {
+      content: '☐ ';
+      font-size: 1em;
+      color: $light;
+    }
+
+    &.task-completed {
+      background: $primary;
+
+      &:before {
+        content: '✓ ';
+        // color: $secondary;
+      }
+    }
+  }
+}
