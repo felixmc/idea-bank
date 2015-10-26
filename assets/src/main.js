@@ -1,14 +1,22 @@
 'use strict';
 
 import App from '../../react/App';
+import LocalCache from '../../react/LocalCache';
+
 import Immutable from 'immutable';
 
 import Debug from 'debug';
 Debug.enable('todo:*');
 
+let debug = require('debug')('todo:driver').bind(null, '');
+
+
 let appElement = document.getElementById('app');
 
-var app = new App(appElement, Immutable.Map({
+// window.Immutable = Immutable;
+
+
+let data = Immutable.Map({
   tasks: Immutable.Map({
     '5': {
       id: '5',
@@ -37,8 +45,20 @@ var app = new App(appElement, Immutable.Map({
     }
   }),
   categories: Immutable.Map()
-}));
+});
+
+let app   = new App(appElement);
+let cache = new LocalCache(app.store);
+
+cache.restore();
+
+// let localData = Immutable.fromJS(JSON.parse(localStorage.getItem('TodoStore') || '{}'));
+
+// debug('data', data, data.toJS());
+// debug('local', localData, localData.toJS());
+
+// app.loadFromLocalStorage();
+// app.registerLocalStorage();
+// app.setState(data);
 
 app.render();
-
-// use container to load react app after server side loading events?

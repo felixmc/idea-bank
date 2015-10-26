@@ -4,26 +4,31 @@ $contrast: #E74C3C;
 $primary: #3498DB;
 $secondary: #2980B9;
 
-$font: Helvetica, sans-serif;
+@import url(https://fonts.googleapis.com/css?family=Signika:700);
+$body-font: Helvetica, sans-serif;
+$title-font: Signika, sans-serif;
 
 
 html, body {
   background: $dark;
-  font: 16px $font;
+  font: 16px $body-font;
   color: $light;
 }
 
 #app {
-  width: 400px;
+  width: 360px;
   margin: 20px auto 0;
 
   h2 {
     text-align: center;
+    font: 2.5em $title-font;
+    margin: 1.5em 0 1em;
   }
 
   .new-task {
     background: $primary;
-    padding: 10px;
+    padding: 14px;
+    border-bottom: 1px solid $secondary;
 
     input {
       background: transparent;
@@ -41,15 +46,21 @@ html, body {
 
   .task-list {
     padding: 0;
-    background: linear-gradient(red, rgb(255,220,0));
+    margin: 0;
+    background: linear-gradient(red, rgb(255,200,0));
+    box-shadow: 0 20px 40px 5px rgba(0,0,0,.5);
   }
 
   .task {
     list-style-type: none;
     font: .9rem monospace;
     padding: 15px 10px;
-    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.1));
+    // background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.1));
+    background: linear-gradient(rgba(255,255,255,.2), transparent);
+    background: linear-gradient(rgba(255, 255, 255, 0.3), transparent 50%, rgba(0,0,0,.05));
+    box-shadow: 0 -1px 0 0 rgba(0,0,0,.1);
     cursor: pointer;
+    text-shadow: 0 1px 0 rgba(0,0,0,.3);
     -webkit-user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
@@ -63,7 +74,8 @@ html, body {
 
     &.task-completed {
       text-decoration: line-through;
-      opacity: .6;
+      opacity: .3;
+      background: linear-gradient($dark, rgba($dark,.5));
 
       &:before {
         content: '✓ ';

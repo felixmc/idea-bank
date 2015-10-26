@@ -41,10 +41,14 @@ class TodoStore {
     debug('create task', task);
 
     this.setState(function(state) {
-      let newState = state.update('tasks', tasks => tasks.set(task.id, task));
+      let newState = state.update('tasks', tasks => tasks.set(task.id, Immutable.Map(task)));
       debug('create task new state', newState.toJS());
       return newState;
     });
+  }
+
+  componentDidUpdate() {
+    debug('did update!');
   }
 
   // createCategory(category) {
@@ -61,7 +65,8 @@ class TodoStore {
       let newState = state.updateIn(['tasks', taskId], task => {
         debug('toggle task', task);
         if (task) {
-          task.isComplete = !task.isComplete;
+          return task.set('isComplete', !task.get('isComplete'))
+          // task.isComplete = !task.isComplete;
         }
         return task;
       });

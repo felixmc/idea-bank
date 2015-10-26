@@ -44,24 +44,14 @@ class TodoApp extends React.Component {
     let { data } = this.state;
     debug('rendering with state', data.toJS(), data.get('tasks').toArray());
 
-    // let tasks = data.get('tasks').toArray();
-
-    // debug('tasks', tasks);
-
-    // tasks.forEach(function(task) {
-    //   debug('task', task);
-      // debug('task:', task.toJS());
-      // return(<Task {...task} key={task.id} />);
-    // });
-
     return (
       <div>
         <h2>React Todos</h2>
         <NewTask tasks={data.get('tasks')} />
         <ul className="task-list">
           {data.get('tasks').toList().map(function(task) {
-            debug('entry:', task);
-            return(<Task {...task} key={task.id} />);
+            // debug('entry:', task);
+            return(<Task {...task.toJS()} key={task.get('id')} />);
           })}
         </ul>
       </div>

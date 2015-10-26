@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import Immutable from 'immutable';
 
 import TodoActions from './TodoActions';
 import TodoStore from './TodoStore';
@@ -13,7 +14,7 @@ let debug = require('debug')('todo:app').bind(null, '');
 class App {
 
   constructor(element, state) {
-    debug('constructing Todo App with state', state.toJS());
+    debug('constructing Todo App with state', state && state.toJS());
 
     if (state) TodoStore.setState(state);
 
