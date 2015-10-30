@@ -2,7 +2,7 @@
 
 import Immutable from 'immutable';
 
-let debug = require('debug')('todo:cache').bind(null, '');
+let debug = require('debug')('idea:cache').bind(null, '');
 
 
 class LocalCache {

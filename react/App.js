@@ -1,25 +1,38 @@
 'use strict';
 
 import React from 'react';
+import AltContainer from 'alt/AltContainer';
 import Immutable from 'immutable';
 
-import TodoActions from './TodoActions';
-import TodoStore from './TodoStore';
+import { Store, Actions } from './AppCommon';
+import IdeaActions from './IdeaActions';
+import StoreManager from './StoreManager';
+import IdeaBank from './components/IdeaBank.jsx';
 
-import TodoApp from './components/TodoApp.jsx';
+let debug = require('debug')('idea:app').bind(null, '');
 
-let debug = require('debug')('todo:app').bind(null, '');
+debug('AppCommon', Store, Actions);
 
 
 class App {
 
-  constructor(element, state) {
-    debug('constructing Todo App with state', state && state.toJS());
+  constructor(element, state, activeStore) {
+    debug('constructing IdeaBank with state', state && state.toJS());
 
-    if (state) TodoStore.setState(state);
+
+    if (activeStore) {
+      this.manager = new StoreManager(Store, Actions, activeStore, IdeaActions);
+
+      this.actions = this.manager.proxyActions;
+      this.store   = this.manager.realStore;
+    } else {
+      this.actions = Actions;
+      this.store   = Store;
+    }
 
     this.element = element;
-    this.store   = TodoStore;
+
+    if (state) this.store.setState(state);
   }
 
   setState(state) {
@@ -31,10 +44,20 @@ class App {
     let state = this.store.getState();
     this.element = element || this.element;
 
-    var appRootElement = React.createElement(TodoApp, {
-      state: state,
-      actions: TodoActions
-    });
+    let self = this;
+
+    let appRootElement = (
+      <AltContainer
+        stores={
+          { ideas: self.store }
+        }
+        actions={
+          { IdeaActions: self.actions }
+        }>
+        <IdeaBank />
+      </AltContainer>
+    );
+
 
     // render to DOM
     if (this.element) {

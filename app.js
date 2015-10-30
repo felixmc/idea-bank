@@ -4,11 +4,14 @@ var config = require('./config.json');
 
 var express = require('express');
 var app     = express();
-var server  = require('http').Server(app);
+var server  = require('http').createServer(app);
 var views   = require('express-dot-engine');
 var sockio  = require('socket.io')(server);
 
 var debug = require('debug')(config.name + ':server').bind(null, '');
+
+var controller = require('./controller');
+
 
 // view engine
 app.engine('dot', views.__express);
@@ -35,16 +38,9 @@ app.use(function(req, res, next){
   res.status(404).send({ error: 'Not found' });
 });
 
-// socket.io
-sockio.on('connection', function(socket) {
-  socket.emit('greet', { hello: 'world' });
-
-  socket.on('ping', function(data) {
-    socket.emit('pong', { time: Date.now() });
-  });
-});
+controller(sockio);
 
 // start
-app.listen(config.port, function() {
+server.listen(config.port, function() {
   debug('server listening on', config.port);
 });

@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
 
-  <title>React ToDo</title>
+  <title>Idea Bank</title>
 
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
   <main id="app"></main>
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
