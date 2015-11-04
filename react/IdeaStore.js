@@ -27,6 +27,8 @@ class IdeaStore {
   createIdea(idea) {
     debug('create idea', idea);
 
+    if (!idea.id) idea.id = Math.floor(Math.random() * 1000);
+
     this.setState(function(state) {
       let newState = state.set(idea.id, Immutable.Map(idea));
       debug('create idea new state', newState.toJS());
