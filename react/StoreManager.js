@@ -1,21 +1,19 @@
-'use strict';
-
 import alt from 'alt';
-import chromeDebug from 'alt/utils/chromeDebug';
 
+class AltProxy {
 
-class StoreManager {
-  constructor(realStore, realActions, proxyStoreClass, proxyActionsClass) {
-    this.realStore   = realStore;
+  constructor(realActions, ActionsClass) {
     this.realActions = realActions;
 
     this.Alt = new alt();
-    chromeDebug(this.Alt);
 
-    this.proxyActions = this.Alt.createActions(proxyActionsClass);
-    this.proxyStore   = this.Alt.createStore(proxyStoreClass, 'ProxyIdeaStore', this.proxyActions, this.realActions);
+    this.proxyActions = this.Alt.createActions(ActionsClass);
+  }
+
+  createProxyStore(ProxyStoreClass) {
+    return this.Alt.createStore(ProxyStoreClass, 'Proxy' + ProxyStoreClass.displayName, this.proxyActions, this.realActions);
   }
 
 }
 
-export default StoreManager;
+export default AltProxy;

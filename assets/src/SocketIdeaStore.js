@@ -1,5 +1,3 @@
-'use stict';
-
 let debug = require('debug')('idea:sockets').bind(null, '');
 
 let socket = io();
@@ -9,9 +7,6 @@ class SocketIdeaStore {
 
   constructor(Actions1, Actions2) {
     debug('constructing Socket Idea Store');
-
-    // this.Actions = Actions1;
-    this.state = {};
 
     this.bindListeners({
       createIdea: Actions1.createIdea

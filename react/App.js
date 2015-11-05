@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import AltContainer from 'alt/AltContainer';
 import Immutable from 'immutable';
@@ -16,15 +14,17 @@ debug('AppCommon', Store, Actions);
 
 class App {
 
-  constructor(element, state, activeStore) {
+  constructor(element, state, ProxyStore) {
     debug('constructing IdeaBank with state', state && state.toJS());
 
 
-    if (activeStore) {
-      this.manager = new StoreManager(Store, Actions, activeStore, IdeaActions);
+    if (ProxyStore) {
+      this.manager = new StoreManager(Actions, IdeaActions);
 
       this.actions = this.manager.proxyActions;
-      this.store   = this.manager.realStore;
+      this.store   = Store;
+
+      this.manager.createProxyStore(ProxyStore);
     } else {
       this.actions = Actions;
       this.store   = Store;

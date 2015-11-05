@@ -14,7 +14,7 @@ let debug = require('debug')('idea:driver').bind(null, '');
 
 let appElement = document.getElementById('app');
 
-let app   = new App(appElement, Immutable.Map());
+let app   = new App(appElement, Immutable.Map(), SocketIdeaStore);
 let cache = new LocalCache(app.store);
 cache.restore();
 
